@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 商品詳細レイアウト -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- アイテム画像 -->
+    <ImageView
+        android:id="@+id/imgItem"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"/>
+
+    <!-- アイテム名 -->
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="アイテム名"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:paddingTop="8dp"/>
+
+    <!-- 必要ポイント -->
+    <TextView
+        android:id="@+id/tvItemPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="必要ポイント: 0"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <!-- 交換ボタン -->
+    <Button
+        android:id="@+id/btnExchange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="交換"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
