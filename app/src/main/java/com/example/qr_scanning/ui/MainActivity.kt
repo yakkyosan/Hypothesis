@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // ユーザー名表示
+        setupObservers()
+
         // ViewModelからポイントデータを監視し、表示を更新
         observeUserPoints()
 
@@ -44,6 +47,16 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnProfile.setOnClickListener {
             navigateToProfileActivity()
+        }
+    }
+
+    private fun setupObservers() {
+        mainViewModel.userProfile.observe(this) { user ->
+            if (user != null) {
+                binding.tvUserName.text = user.name
+            } else {
+                binding.tvUserName.text = "名前（未設定）"
+            }
         }
     }
 

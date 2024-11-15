@@ -3,7 +3,6 @@ package com.example.qr_scanning.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.qr_scanning.model.User
 import com.example.qr_scanning.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
@@ -19,8 +18,8 @@ class ProfileViewModel(private val userRepository: UserRepository) : ViewModel()
         loadUserProfile()
     }
 
-    private fun loadUserProfile() {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun loadUserProfile() {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val user = userRepository.getUser(1) // 仮のIDでユーザーを取得
                 _userProfile.postValue(user)
@@ -37,7 +36,7 @@ class ProfileViewModel(private val userRepository: UserRepository) : ViewModel()
             val updatedUser = currentUser.copy(name = newName)
             CoroutineScope(Dispatchers.IO).launch {
                 userRepository.updateUser(updatedUser)
-                _userProfile.postValue(updatedUser)
+                loadUserProfile()
             }
         }
     }
