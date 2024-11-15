@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="item_ids">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </array>
+    <array name="item_names">
+        <item>アイテム1</item>
+        <item>アイテム2</item>
+        <item>アイテム3</item>
+    </array>
+    <array name="item_points">
+        <item>100</item>
+        <item>200</item>
+        <item>300</item>
+    </array>
+    <array name="item_images">
+        <item>@drawable/res_image1</item>
+        <item>@drawable/res_image2</item>
+        <item>@drawable/res_image3</item>
+    </array>
+</resources>

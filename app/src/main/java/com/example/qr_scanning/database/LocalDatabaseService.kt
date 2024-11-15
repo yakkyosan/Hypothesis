@@ -5,6 +5,7 @@ package com.example.qr_scanning.database
 
 import android.content.Context
 import com.example.qr_scanning.model.*
+import com.example.qr_scanning.dao.ItemDao
 
 class LocalDatabaseService(context: Context) {
 
@@ -36,6 +37,9 @@ class LocalDatabaseService(context: Context) {
         db.itemDao().insert(item)
     }
 
+    fun getItemDao(): ItemDao {
+        return db.itemDao()
+    }
     // その他必要なメソッドをここに追加
 }
 
