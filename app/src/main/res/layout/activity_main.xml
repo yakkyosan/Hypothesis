@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- メイン画面 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- ユーザー情報表示 -->
+    <!-- ポイント表示 -->
     <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ユーザー名"
-        android:textSize="20sp"
-        android:paddingBottom="8dp"/>
-
-    <TextView
-        android:id="@+id/tvUserPoints"
+        android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ポイント: 0"
-        android:textSize="16sp"
-        android:paddingBottom="16dp"/>
+        android:textSize="24sp"
+        android:layout_gravity="center_horizontal" />
 
-    <!-- QRコード読み取り画面遷移ボタン -->
+    <!-- QRコードスキャンボタン -->
     <Button
-        android:id="@+id/btnQrScan"
+        android:id="@+id/btnScanQr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="QRコードを読み取る" />
+        android:text="QRコードスキャン"
+        android:layout_marginTop="16dp" />
 
-    <!-- ポイント交換画面遷移ボタン -->
+    <!-- ポイント交換ボタン -->
     <Button
-        android:id="@+id/btnReward"
+        android:id="@+id/btnRewards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ポイントを交換する"
-        android:layout_marginTop="8dp" />
+        android:text="ポイント交換"
+        android:layout_marginTop="16dp" />
 
-    <!-- ユーザー情報変更画面遷移ボタン -->
+    <!-- プロフィール設定ボタン -->
     <Button
         android:id="@+id/btnProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ユーザー情報を変更する"
-        android:layout_marginTop="8dp" />
-
+        android:text="プロフィール設定"
+        android:layout_marginTop="16dp" />
 </LinearLayout>
-

@@ -1,6 +1,6 @@
 package com.example.qr_scanning.model;
 
-// 交換アイテムの[名前, 必要ポイント, 画像]情報
+// 交換アイテムの[ID, 名前, 必要ポイント, 画像]情報
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -14,13 +14,14 @@ public class Item {
 
     private int requiredPoints; // 交換に必要なポイント
 
-    private String imageUrl; // アイテム画像のURL
+    private int imageResId; // drawable内のリソースID
 
     // コンストラクタ
-    public Item(String name, int requiredPoints, String imageUrl) {
+    public Item(int id, String name, int requiredPoints, int imageResId) {
+        this.id = id;
         this.name = name;
         this.requiredPoints = requiredPoints;
-        this.imageUrl = imageUrl;
+        this.imageResId = imageResId;
     }
 
     // ゲッターとセッター
@@ -48,11 +49,11 @@ public class Item {
         this.requiredPoints = requiredPoints;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public int getImageResId() {
+        return imageResId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageResId(int imageResId) {
+        this.imageResId = imageResId;
     }
 }
