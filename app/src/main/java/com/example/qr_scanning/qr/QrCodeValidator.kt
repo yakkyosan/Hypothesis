@@ -1,13 +1,32 @@
 package com.example.qr_scanning.qr
 
-// QRコードの有効性を判断
+import com.example.qr_scanning.viewmodel.QrViewModel
 
-object QrCodeValidator {
+class QrCodeValidator(
+    private val qrViewModel: QrViewModel
+) {
+    /**
+     * QRコードの内容を検証し、ポイントを付与する処理
+     * @param qrCode: 検出されたQRコードの内容
+     */
+    fun validateAndAwardPoints(qrCode: String) {
+        if (isValidQrCode(qrCode)) {
+            // 有効なQRコードの場合、20ポイントを加算
+            qrViewModel.addPoints(20)
+        } else {
+            // 無効なQRコードの場合、ログまたは通知を表示する
+            qrViewModel.updateScanResult("無効なQRコードです")
+        }
+    }
 
-    // 有効なQRコードかどうかを判定するメソッド
-    fun isValid(qrCode: String): Boolean {
-        // ここでQRコードの有効性を判断するロジックを記述
-        // 例えば、特定のフォーマットか、あるいは特定の文字列を含んでいるかなど
-        return qrCode.startsWith("http") // URL形式かどうかの例
+    /**
+     * QRコードが有効かどうかを判断する
+     * @param qrCode: 検出されたQRコードの内容
+     * @return 有効であれば true、無効であれば false
+     */
+    fun isValidQrCode(qrCode: String): Boolean {
+        // シンプルに、QRコードが空でない場合を有効とする
+        // 必要に応じて更に詳細な検証を実装
+        return qrCode.isNotBlank()
     }
 }

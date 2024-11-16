@@ -22,6 +22,9 @@ class ViewModelFactory(private val userRepository: UserRepository,
                 }
                 RewardViewModel(userRepository, itemRepository) as T
             }
+            modelClass.isAssignableFrom(QrViewModel::class.java) -> {
+                QrViewModel(userRepository) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }
     }
