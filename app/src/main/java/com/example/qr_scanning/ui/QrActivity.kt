@@ -9,15 +9,20 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import com.example.qr_scanning.base.MyApplication
 
 import com.example.qr_scanning.databinding.ActivityQrBinding
 import com.example.qr_scanning.qr.*
 import com.example.qr_scanning.utils.*
+import com.example.qr_scanning.viewmodel.QrViewModel
+import com.example.qr_scanning.viewmodel.ViewModelFactory
 
 class QrActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQrBinding
     private lateinit var qrCodeScanner: QrCodeScanner
+    private lateinit var qrViewModel: QrViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +44,15 @@ class QrActivity : AppCompatActivity() {
 
     // カメラの初期化
     private fun initializeScanner() {
-        qrCodeScanner = QrCodeScanner(this, binding.previewView, ::onQrCodeDetected)
+        val qrCodeValidator = QrCodeValidator(qrViewModel)
+        qrCodeScanner = QrCodeScanner(this, binding.previewView, ::onQrCodeDetected, qrCodeValidator)
         qrCodeScanner.startCamera()
     }
 
     // QRコードが検出されたときの処理
     private fun onQrCodeDetected(qrCode: String) {
-        if (QrCodeValidator.isValid(qrCode)) {
+        val qrCodeValidator = QrCodeValidator(qrViewModel)
+        if (qrCodeValidator.isValidQrCode(qrCode)) {
             DialogUtils.showAlert(this, "QRコード", "有効なQRコードが読み取られました: $qrCode")
         } else {
             DialogUtils.showAlert(this, "QRコード", "無効なQRコードです。")
@@ -59,6 +66,13 @@ class QrActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (!::qrViewModel.isInitialized) {
+            val app = application as MyApplication
+            qrViewModel = ViewModelProvider(this, ViewModelFactory(app.userRepository)).get(QrViewModel::class.java)
+        }
+
+        // パーミッション結果の処理
         PermissionUtils.handlePermissionResult(
             requestCode, grantResults,
             onGranted = { initializeScanner() },

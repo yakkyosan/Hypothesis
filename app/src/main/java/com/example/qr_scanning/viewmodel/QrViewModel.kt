@@ -24,4 +24,9 @@ class QrViewModel(private val userRepository: UserRepository) : ViewModel() {
             }
         }
     }
+    fun updateScanResult(message: String) {
+        viewModelScope.launch {
+            _scanResult.value = message
+        }
+    }
 }
