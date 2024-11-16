@@ -3,12 +3,8 @@ package com.example.qr_scanning.ui
 // QRコード読み取り画面！！
 // activity_qr.xmlを使います
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.qr_scanning.base.MyApplication
 
