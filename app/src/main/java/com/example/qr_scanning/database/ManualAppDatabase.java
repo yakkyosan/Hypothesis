@@ -3,6 +3,7 @@ package com.example.qr_scanning.database;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.DatabaseConfiguration;
@@ -39,6 +40,9 @@ public class ManualAppDatabase extends AppDatabase {
                         db.execSQL("CREATE TABLE IF NOT EXISTS user_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, profileImageUrl TEXT, points INTEGER)");
                         db.execSQL("CREATE TABLE IF NOT EXISTS item_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, requiredPoints INTEGER, imageResId INTEGER)");
                         db.execSQL("CREATE TABLE IF NOT EXISTS scanned_qr_code_table (id INTEGER PRIMARY KEY AUTOINCREMENT, qrCode TEXT, scannedAt INTEGER)");
+
+                        // ログの出力
+                        Log.d("Database", "Tables created successfully");
                     }
 
                     @Override
@@ -53,6 +57,11 @@ public class ManualAppDatabase extends AppDatabase {
                 .build();
 
         openHelper = new FrameworkSQLiteOpenHelperFactory().create(configuration);
+
+        // デバッグ：テーブルが存在しない場合手動で作成
+        SupportSQLiteDatabase db = openHelper.getWritableDatabase();
+        db.execSQL("CREATE TABLE IF NOT EXISTS scanned_qr_code_table (id INTEGER PRIMARY KEY AUTOINCREMENT, qrCode TEXT, scannedAt INTEGER)");
+        Log.d("Database", "Checked or created scanned_qr_code_table manually");
 
         // DAOのインスタンスを生成
         userDao = new ManualUserDao(openHelper);

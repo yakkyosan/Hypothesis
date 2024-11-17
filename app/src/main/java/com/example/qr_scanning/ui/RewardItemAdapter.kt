@@ -33,7 +33,7 @@ class RewardItemAdapter(
 
         fun bind(item: Item, onItemClicked: (Int) -> Unit) {
             binding.tvItemName.text = item.name
-            binding.tvItemPoints.text = "必要ポイント: ${item.requiredPoints}"
+            binding.tvItemPoints.text = "必要ポイント：${item.requiredPoints}"
             binding.imgItem.setImageResource(item.imageResId) // 仮にリソースIDが含まれる場合
             binding.btnExchange.setOnClickListener {
                 onItemClicked(item.id) // 交換ボタンがクリックされたときの処理
