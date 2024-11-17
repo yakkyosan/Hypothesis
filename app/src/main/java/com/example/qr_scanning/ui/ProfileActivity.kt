@@ -1,9 +1,10 @@
+// ProfileActivity.kt
 package com.example.qr_scanning.ui
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.qr_scanning.base.MyApplication
 import com.example.qr_scanning.databinding.ActivityProfileBinding
 import com.example.qr_scanning.viewmodel.ProfileViewModel
@@ -12,18 +13,20 @@ import com.example.qr_scanning.viewmodel.ViewModelFactory
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
-    private lateinit var profileViewModel: ProfileViewModel
+
+    // クラス変数としてProfileViewModelを初期化
+    private val profileViewModel: ProfileViewModel by viewModels {
+        val app = application as MyApplication
+        ViewModelFactory(
+            userRepository = app.localDatabaseService.userRepository
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // ViewModelの取得
-        val app = application as MyApplication
-        val factory = ViewModelFactory(app.userRepository)
-        profileViewModel = ViewModelProvider(this, factory)[ProfileViewModel::class.java]
 
         // プロフィール情報の初期化
         setupObservers()

@@ -49,14 +49,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     // CameraXライブラリ
-    implementation("androidx.camera:camera-core:1.2.0")
-    implementation("androidx.camera:camera-camera2:1.2.0")
-    implementation("androidx.camera:camera-lifecycle:1.2.0")
-    implementation("androidx.camera:camera-view:1.2.0")
-    implementation("androidx.camera:camera-extensions:1.2.0")
+    implementation("androidx.camera:camera-core:1.1.0-beta01")
+    implementation("androidx.camera:camera-camera2:1.1.0-beta01")
+    implementation("androidx.camera:camera-lifecycle:1.1.0-beta01")
+    implementation("androidx.camera:camera-view:1.0.0-alpha31")
+    implementation("androidx.camera:camera-extensions:1.0.0-alpha31")
 
     // ML Kit Barcode-Scanning
-    implementation("com.google.mlkit:barcode-scanning:17.0.0")
+    implementation("com.google.mlkit:barcode-scanning:17.0.3")
 
     // Room Database
     implementation("androidx.room:room-runtime:2.5.0")

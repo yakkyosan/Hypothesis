@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="valid_qr_code_ids">
+        <item>yakkyo_QRtest01</item>
+        <item>yakkyo_QRtest02</item>
+        <item>yakkyo_QRtest03</item>
+        <item>yakkyo_QRtest04</item>
+        <item>yakkyo_QRtest05</item>
+        <item>yakkyo_QRtest06</item>
+        <item>yakkyo_QRtest07</item>
+        <item>yakkyo_QRtest08</item>
+        <item>yakkyo_QRtest09</item>
+        <item>yakkyo_QRtest10</item>
+    </string-array>
+</resources>

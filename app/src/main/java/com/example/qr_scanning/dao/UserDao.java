@@ -2,6 +2,7 @@ package com.example.qr_scanning.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -11,7 +12,7 @@ import com.example.qr_scanning.model.User;
 public interface UserDao {
 
     // ユーザーを追加するメソッド
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User user);
 
     // 特定のIDでユーザー情報を取得するメソッド

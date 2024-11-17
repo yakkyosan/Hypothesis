@@ -1,12 +1,18 @@
+// ViewModelFactory.kt
 package com.example.qr_scanning.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.qr_scanning.repository.ItemRepository
+import com.example.qr_scanning.repository.QrCodeRepository
+import com.example.qr_scanning.repository.UserRepository
 
-import com.example.qr_scanning.repository.*
-
-class ViewModelFactory(private val userRepository: UserRepository,
-                       private val itemRepository: ItemRepository? = null) : ViewModelProvider.Factory {
+class ViewModelFactory(
+    private val userRepository: UserRepository,
+    private val qrCodeRepository: QrCodeRepository? = null,
+    private val itemRepository: ItemRepository? = null,
+    private val validQrCodeIds: List<String>? = null
+) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
@@ -23,7 +29,10 @@ class ViewModelFactory(private val userRepository: UserRepository,
                 RewardViewModel(userRepository, itemRepository) as T
             }
             modelClass.isAssignableFrom(QrViewModel::class.java) -> {
-                QrViewModel(userRepository) as T
+                if (qrCodeRepository == null) {
+                    throw IllegalArgumentException("QrCodeRepository must not be null for QrViewModel")
+                }
+                QrViewModel(userRepository, qrCodeRepository, validQrCodeIds!!) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

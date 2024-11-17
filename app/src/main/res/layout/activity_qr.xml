@@ -10,13 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <!-- シャッターボタン -->
+    <ImageButton
+        android:id="@+id/btnCapture"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/camera_button"
+        android:background="@null"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="撮影ボタン" />
+
     <!-- メイン画面へ戻るボタン -->
     <Button
         android:id="@+id/btnBackToMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="戻る"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="16dp" />
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="100dp" />
 
 </FrameLayout>

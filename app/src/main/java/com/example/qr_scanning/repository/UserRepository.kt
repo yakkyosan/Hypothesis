@@ -1,27 +1,33 @@
+// UserRepository.kt
 package com.example.qr_scanning.repository
 
-// ユーザー関連のデータ操作
-// LocalDatabaseServiceを使い、UIからアクセスしない
-
+import com.example.qr_scanning.dao.UserDao
 import com.example.qr_scanning.model.User
-import com.example.qr_scanning.database.LocalDatabaseService
 
-class UserRepository(private val localDatabaseService: LocalDatabaseService) {
+class UserRepository(private val userDao: UserDao) {
 
-    // ユーザー情報を取得する
-    fun getUser(userId: Int): User? {
-        return localDatabaseService.getUser(userId)
+    /**
+     * ユーザーをIDで取得する
+     * @param userId: ユーザーID
+     * @return User オブジェクトまたは null
+     */
+    suspend fun getUser(userId: Int): User? {
+        return userDao.getUserById(userId)
     }
 
-    // ユーザー情報を追加する
-    fun insertUser(user: User) {
-        localDatabaseService.insertUser(user)
+    /**
+     * 新しいユーザーを追加する
+     * @param user: 追加するUserオブジェクト
+     */
+    suspend fun insertUser(user: User) {
+        userDao.insert(user)
     }
 
-    // ユーザー情報を更新する
-    fun updateUser(user: User) {
-        localDatabaseService.updateUser(user)
+    /**
+     * 既存のユーザー情報を更新する
+     * @param user: 更新するUserオブジェクト
+     */
+    suspend fun updateUser(user: User) {
+        userDao.update(user)
     }
-
-    // その他のデータ操作メソッドを追加
 }

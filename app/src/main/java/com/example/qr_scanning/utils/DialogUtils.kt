@@ -1,41 +1,71 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.qr_scanning.utils
 
-// 確認ダイアログのためのユーティリティ関数
-
+import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import androidx.appcompat.app.AppCompatActivity
+import com.example.qr_scanning.R
+import java.lang.ref.WeakReference
 
 object DialogUtils {
 
-    // 確認ダイアログを表示するメソッド
-    fun showConfirmationDialog(
-        context: Context,
-        title: String,
-        message: String,
-        positiveButtonText: String = "OK",
-        negativeButtonText: String = "キャンセル",
-        onConfirmed: () -> Unit
-    ) {
+    private var loadingDialogRef: WeakReference<AlertDialog>? = null
+
+    /**
+     * アラートダイアログを表示する
+     * @param context: コンテキスト
+     * @param title: タイトル
+     * @param message: メッセージ
+     * @param onOk: OKボタンが押された際のコールバック
+     */
+    fun showAlert(context: Context, title: String, message: String, onOk: () -> Unit = {}) {
+        // Activity が有効か確認
+        if (context !is AppCompatActivity || context.isFinishing || context.isDestroyed) {
+            return
+        }
+
         AlertDialog.Builder(context)
             .setTitle(title)
             .setMessage(message)
-            .setPositiveButton(positiveButtonText) { _, _ -> onConfirmed() }
-            .setNegativeButton(negativeButtonText, null)
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+                onOk()
+            }
+            .setCancelable(false)
             .show()
     }
 
-    // 通知ダイアログを表示するメソッド
-    fun showAlert(
-        context: Context,
-        title: String,
-        message: String,
-        buttonText: String = "OK"
-    ) {
-        AlertDialog.Builder(context)
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(buttonText, null)
-            .show()
+    /**
+     * ローディングダイアログを表示する
+     * @param context: コンテキスト
+     * @param message: メッセージ
+     */
+    fun showLoadingDialog(context: Context, message: String) {
+        // Activity が有効か確認
+        if (context !is AppCompatActivity || context.isFinishing || context.isDestroyed) {
+            return
+        }
+
+        dismissLoadingDialog() // 既存のダイアログを閉じる
+
+        val builder = AlertDialog.Builder(context)
+        val inflater = LayoutInflater.from(context)
+        val dialogView = inflater.inflate(R.layout.dialog_loading, null)
+        builder.setView(dialogView)
+        builder.setMessage(message)
+        builder.setCancelable(false)
+        val loadingDialog = builder.create()
+        loadingDialog.show()
+        loadingDialogRef = WeakReference(loadingDialog)
+    }
+
+    /**
+     * ローディングダイアログを非表示にする
+     */
+    fun dismissLoadingDialog() {
+        loadingDialogRef?.get()?.dismiss()
+        loadingDialogRef = null
     }
 }
