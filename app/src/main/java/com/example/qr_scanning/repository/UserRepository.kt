@@ -1,6 +1,7 @@
 // UserRepository.kt
 package com.example.qr_scanning.repository
 
+import androidx.lifecycle.LiveData
 import com.example.qr_scanning.dao.UserDao
 import com.example.qr_scanning.model.User
 

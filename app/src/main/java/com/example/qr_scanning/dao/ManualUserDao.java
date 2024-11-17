@@ -1,6 +1,7 @@
 package com.example.qr_scanning.dao;
 
 import android.database.Cursor;
+
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.qr_scanning.model.User;

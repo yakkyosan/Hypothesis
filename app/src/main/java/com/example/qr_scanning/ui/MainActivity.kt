@@ -33,11 +33,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // ユーザー名表示
+        // オブザーバー設定
         setupObservers()
-
-        // ViewModelからポイントデータを監視し、表示を更新
-        observeUserPoints()
 
         // 各ボタンのリスナーを設定
         binding.btnScanQr.setOnClickListener {
@@ -53,6 +50,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        // ユーザー情報の再読み込み
+        mainViewModel.loadUserProfile()
+    }
+
     private fun setupObservers() {
         mainViewModel.userProfile.observe(this) { user ->
             if (user != null) {
@@ -61,15 +64,9 @@ class MainActivity : AppCompatActivity() {
                 binding.tvUserName.text = "名前（未設定）"
             }
         }
-    }
 
-    @SuppressLint("SetTextI18n")
-    @Suppress("DEPRECATION")
-    private fun observeUserPoints() {
-        lifecycleScope.launchWhenStarted {
-            mainViewModel.userPoints.collectLatest { points ->
-                binding.tvPoints.text = "ポイント: $points"
-            }
+        mainViewModel.userPoints.observe(this) { points ->
+            binding.tvPoints.text = "ポイント：$points"
         }
     }
 
