@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
             navigateToQrActivity()
         }
 
+        binding.btnSpotList.setOnClickListener {
+            navigateToSpotActivity()
+        }
+
         binding.btnRewards.setOnClickListener {
             navigateToRewardActivity()
         }
@@ -72,6 +76,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigateToQrActivity() {
         val intent = Intent(this, QrActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun navigateToSpotActivity() {
+        val intent = Intent(this, SpotActivity::class.java)
         startActivity(intent)
     }
 

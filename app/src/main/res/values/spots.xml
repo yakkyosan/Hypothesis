@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="spot_names">
+        <item>熊本県農業公園カントリーパーク</item>
+        <item>竹迫城跡公園</item>
+        <item>(株)合志百花園ファーム</item>
+        <item>弁天山公園</item>
+        <item>合志市総合センター「ヴィーブル」</item>
+        <item>合志市西合志図書館</item>
+        <item>合志マンガミュージアム</item>
+    </string-array>
+
+    <string-array name="spot_addresses">
+        <item>熊本県合志市栄3802ｰ4</item>
+        <item>熊本県合志市上庄227</item>
+        <item>熊本県合志市合生4275</item>
+        <item>熊本県合志市野々島</item>
+        <item>熊本県合志市福原2922</item>
+        <item>熊本県合志市御代志1661ｰ265</item>
+        <item>熊本県合志市御代志1661ｰ271</item>
+    </string-array>
+
+    <string-array name="spot_map_urls">
+        <item>https://maps.app.goo.gl/5m7tRm8P2anY48eo9</item>
+        <item>https://maps.app.goo.gl/pjAofEB3UwCnPkbN9</item>
+        <item>https://maps.app.goo.gl/V2UtRcfVmeNrtgBSA</item>
+        <item>https://maps.app.goo.gl/db4NzCWUGVMh1nuC6</item>
+        <item>https://maps.app.goo.gl/nEFhciVrGXt8g6TZ7</item>
+        <item>https://maps.app.goo.gl/zjPxT88XYDbgPn2u6</item>
+        <item>https://maps.app.goo.gl/UvQt3YqbfaAa5Bx46</item>
+    </string-array>
+</resources>

@@ -31,6 +31,14 @@
         android:text="QRコードスキャン"
         android:layout_marginTop="16dp" />
 
+    <!-- 交信スポット一覧ボタン -->
+    <Button
+        android:id="@+id/btnSpotList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="交信スポット一覧"
+        android:layout_marginTop="16dp" />
+
     <!-- ポイント交換ボタン -->
     <Button
         android:id="@+id/btnRewards"

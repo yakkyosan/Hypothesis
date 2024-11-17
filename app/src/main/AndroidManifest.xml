@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.QrActivity" android:exported="false" />
+        <activity android:name=".ui.SpotActivity" android:exported="false" />
         <activity android:name=".ui.ProfileActivity" android:exported="false" />
         <activity android:name=".ui.RewardActivity" android:exported="false" />
     </application>
