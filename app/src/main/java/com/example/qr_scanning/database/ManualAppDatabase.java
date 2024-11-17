@@ -1,3 +1,4 @@
+// ManualAppDatabase.java
 package com.example.qr_scanning.database;
 
 import android.annotation.SuppressLint;
@@ -10,12 +11,22 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory;
 
-import com.example.qr_scanning.dao.*;
+import com.example.qr_scanning.dao.ItemDao;
+import com.example.qr_scanning.dao.ManualItemDao;
+import com.example.qr_scanning.dao.ManualQrCodeDao;
+import com.example.qr_scanning.dao.ManualUserDao;
+import com.example.qr_scanning.dao.QrCodeDao;
+import com.example.qr_scanning.dao.UserDao;
+import com.example.qr_scanning.model.Item;
+import com.example.qr_scanning.model.ScannedQrCode;
+import com.example.qr_scanning.model.User;
 
+// 手動でインスタンスを提供
 public class ManualAppDatabase extends AppDatabase {
 
     private final UserDao userDao;
     private final ItemDao itemDao;
+    private final QrCodeDao qrCodeDao;
     private final SupportSQLiteOpenHelper openHelper;
 
     public ManualAppDatabase(Context context) {
@@ -27,6 +38,7 @@ public class ManualAppDatabase extends AppDatabase {
                         // テーブルの作成
                         db.execSQL("CREATE TABLE IF NOT EXISTS user_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, profileImageUrl TEXT, points INTEGER)");
                         db.execSQL("CREATE TABLE IF NOT EXISTS item_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, requiredPoints INTEGER, imageResId INTEGER)");
+                        db.execSQL("CREATE TABLE IF NOT EXISTS scanned_qr_code_table (id INTEGER PRIMARY KEY AUTOINCREMENT, qrCode TEXT, scannedAt INTEGER)");
                     }
 
                     @Override
@@ -34,6 +46,7 @@ public class ManualAppDatabase extends AppDatabase {
                         // マイグレーション処理（ここでは単純にデータベースをリセット）
                         db.execSQL("DROP TABLE IF EXISTS user_table");
                         db.execSQL("DROP TABLE IF EXISTS item_table");
+                        db.execSQL("DROP TABLE IF EXISTS scanned_qr_code_table");
                         onCreate(db);
                     }
                 })
@@ -44,6 +57,7 @@ public class ManualAppDatabase extends AppDatabase {
         // DAOのインスタンスを生成
         userDao = new ManualUserDao(openHelper);
         itemDao = new ManualItemDao(openHelper);
+        qrCodeDao = new ManualQrCodeDao(openHelper);
     }
 
     @Override
@@ -54,6 +68,11 @@ public class ManualAppDatabase extends AppDatabase {
     @Override
     public ItemDao itemDao() {
         return itemDao;
+    }
+
+    @Override
+    public QrCodeDao qrCodeDao() {
+        return qrCodeDao;
     }
 
     @NonNull
@@ -67,12 +86,13 @@ public class ManualAppDatabase extends AppDatabase {
     @Override
     protected InvalidationTracker createInvalidationTracker() {
         // InvalidationTrackerは使用しない場合、ダミーで返す
-        return new InvalidationTracker(this, "user_table", "item_table");
+        return new InvalidationTracker(this, "user_table", "item_table", "scanned_qr_code_table");
     }
 
     @Override
     public void clearAllTables() {
         openHelper.getWritableDatabase().execSQL("DELETE FROM user_table");
         openHelper.getWritableDatabase().execSQL("DELETE FROM item_table");
+        openHelper.getWritableDatabase().execSQL("DELETE FROM scanned_qr_code_table");
     }
 }

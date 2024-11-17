@@ -22,7 +22,10 @@ class MainActivity : AppCompatActivity() {
 
     // MainViewModelをインスタンス化（by viewModelsを使用）
     private val mainViewModel: MainViewModel by viewModels {
-        ViewModelFactory((application as MyApplication).userRepository)
+        val app = application as MyApplication
+        ViewModelFactory(
+            userRepository = app.localDatabaseService.userRepository
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,5 +88,3 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
-
-

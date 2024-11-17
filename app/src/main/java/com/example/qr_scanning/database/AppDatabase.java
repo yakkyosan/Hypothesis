@@ -1,20 +1,25 @@
+// AppDatabase.java
 package com.example.qr_scanning.database;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+
 import com.example.qr_scanning.dao.ItemDao;
+import com.example.qr_scanning.dao.QrCodeDao;
 import com.example.qr_scanning.dao.UserDao;
 import com.example.qr_scanning.model.Item;
+import com.example.qr_scanning.model.ScannedQrCode;
 import com.example.qr_scanning.model.User;
 
 // Roomデータベースの抽象クラス
-@Database(entities = {User.class, Item.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, Item.class, ScannedQrCode.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
     public abstract ItemDao itemDao();
+    public abstract QrCodeDao qrCodeDao();
 
     // 手動でインスタンスを提供
     private static AppDatabase instance;
