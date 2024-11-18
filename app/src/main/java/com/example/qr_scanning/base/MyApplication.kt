@@ -3,6 +3,7 @@ package com.example.qr_scanning.base
 
 import android.app.Application
 import android.content.res.TypedArray
+import android.util.Log
 import com.example.qr_scanning.R
 import com.example.qr_scanning.database.LocalDatabaseService
 import com.example.qr_scanning.model.Item
@@ -25,6 +26,9 @@ class MyApplication : Application() {
 
         // アイテムデータの初期化
         initializeItems()
+
+        val items = localDatabaseService.itemRepository.getAllItems()
+        Log.d("MyApplication", "Database items after initialization: $items")
     }
 
     private fun initializeItems() {
@@ -43,11 +47,15 @@ class MyApplication : Application() {
                         ids[i],
                         names[i],
                         points[i],
-                        images.getResourceId(i, 0)
+                        images.getResourceId(i, 0),
+                        0
                     )
                     itemRepository.insertItem(item)
                 }
                 images.recycle() // TypedArrayのリソースを解放
+
+                val items = itemRepository.getAllItems()
+                Log.d("MyApplication", "Inserted items: $items")
             }
         }
     }

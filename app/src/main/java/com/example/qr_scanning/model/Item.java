@@ -16,12 +16,15 @@ public class Item {
 
     private int imageResId; // drawable内のリソースID
 
+    private int exchangeStatus = 0;
+
     // コンストラクタ
-    public Item(int id, String name, int requiredPoints, int imageResId) {
+    public Item(int id, String name, int requiredPoints, int imageResId, int exchangeStatus) {
         this.id = id;
         this.name = name;
         this.requiredPoints = requiredPoints;
         this.imageResId = imageResId;
+        this.exchangeStatus = exchangeStatus;
     }
 
     // ゲッターとセッター
@@ -55,5 +58,13 @@ public class Item {
 
     public void setImageResId(int imageResId) {
         this.imageResId = imageResId;
+    }
+
+    public int getExchangeStatus() {
+        return exchangeStatus;
+    }
+
+    public void setExchangeStatus(int exchangeStatus) {
+        this.exchangeStatus = exchangeStatus;
     }
 }

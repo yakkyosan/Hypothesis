@@ -8,18 +8,18 @@
         <item>5</item>
     </array>
     <array name="item_names">
-        <item>アイテム1</item>
-        <item>アイテム2</item>
-        <item>アイテム3</item>
-        <item>アイテム4</item>
-        <item>アイテム5</item>
+        <item>OMEGA3 Naturels EGG</item>
+        <item>MILK’ORO Aging Yogurt</item>
+        <item>弁天マンゴー</item>
+        <item>いちじょう米</item>
+        <item>大将マンゴー</item>
     </array>
     <array name="item_points">
+        <item>70</item>
+        <item>70</item>
         <item>100</item>
-        <item>100</item>
-        <item>100</item>
-        <item>100</item>
-        <item>100</item>
+        <item>120</item>
+        <item>150</item>
     </array>
     <array name="item_images">
         <item>@drawable/item1</item>
