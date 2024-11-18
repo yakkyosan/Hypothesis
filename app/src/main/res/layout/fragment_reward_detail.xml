@@ -32,12 +32,27 @@
         android:textSize="16sp"
         android:gravity="center"/>
 
-    <!-- 交換ボタン -->
-    <Button
-        android:id="@+id/btnExchange"
+    <!-- ボタンを横並びにするための水平レイアウト -->
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="交換"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp" />
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <!-- 詳細ボタン -->
+        <Button
+            android:id="@+id/btnDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="詳細"
+            android:layout_marginEnd="8dp" />
+
+        <!-- 交換ボタン -->
+        <Button
+            android:id="@+id/btnExchange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="交換" />
+    </LinearLayout>
 </LinearLayout>

@@ -25,7 +25,8 @@ public class ManualItemDao implements ItemDao {
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("name")),
                         cursor.getInt(cursor.getColumnIndexOrThrow("requiredPoints")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("imageResId"))
+                        cursor.getInt(cursor.getColumnIndexOrThrow("imageResId")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("exchangeStatus"))
                 ));
             }
         } catch (Exception e) {
@@ -44,7 +45,8 @@ public class ManualItemDao implements ItemDao {
                         cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                         cursor.getString(cursor.getColumnIndexOrThrow("name")),
                         cursor.getInt(cursor.getColumnIndexOrThrow("requiredPoints")),
-                        cursor.getInt(cursor.getColumnIndexOrThrow("imageResId"))
+                        cursor.getInt(cursor.getColumnIndexOrThrow("imageResId")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("exchangeStatus"))
                 );
             }
         } catch (Exception e) {
@@ -58,8 +60,23 @@ public class ManualItemDao implements ItemDao {
         SupportSQLiteDatabase db = openHelper.getWritableDatabase();
         db.beginTransaction();
         try {
-            db.execSQL("INSERT INTO item_table (name, requiredPoints, imageResId) VALUES (?, ?, ?)",
-                    new Object[]{item.getName(), item.getRequiredPoints(), item.getImageResId()});
+            db.execSQL("INSERT INTO item_table (id, name, requiredPoints, imageResId, exchangeStatus) VALUES (?, ?, ?, ?, ?)",
+                    new Object[]{item.getId(), item.getName(), item.getRequiredPoints(), item.getImageResId(), item.getExchangeStatus()});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
+    @Override
+    public void update(Item item) {
+        SupportSQLiteDatabase db = openHelper.getWritableDatabase();
+        db.beginTransaction();
+        try {
+            db.execSQL("UPDATE item_table SET name = ?, requiredPoints = ?, imageResId = ?, exchangeStatus = ? WHERE id = ?",
+                    new Object[]{item.getName(), item.getRequiredPoints(), item.getImageResId(), item.getExchangeStatus(), item.getId()});
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();

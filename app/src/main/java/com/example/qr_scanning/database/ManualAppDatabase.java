@@ -38,7 +38,8 @@ public class ManualAppDatabase extends AppDatabase {
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         // テーブルの作成
                         db.execSQL("CREATE TABLE IF NOT EXISTS user_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, profileImageUrl TEXT, points INTEGER)");
-                        db.execSQL("CREATE TABLE IF NOT EXISTS item_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, requiredPoints INTEGER, imageResId INTEGER)");
+                        db.execSQL("CREATE TABLE IF NOT EXISTS item_table (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, requiredPoints INTEGER, imageResId INTEGER, exchangeStatus INTEGER)");
+                        Log.d("ManualAppDatabase", "Created table item_table");
                         db.execSQL("CREATE TABLE IF NOT EXISTS scanned_qr_code_table (id INTEGER PRIMARY KEY AUTOINCREMENT, qrCode TEXT, scannedAt INTEGER)");
 
                         // ログの出力
