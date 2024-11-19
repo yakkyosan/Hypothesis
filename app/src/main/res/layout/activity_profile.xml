@@ -34,6 +34,14 @@
         android:maxLength="20"
         android:paddingTop="16dp" />
 
+    <!-- 注意書き -->
+    <TextView
+        android:id="@+id/tvUserNameWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20文字以内で入力してください。"
+        android:layout_marginTop="4dp" />
+
     <!-- 保存ボタン -->
     <Button
         android:id="@+id/btnSaveProfile"
