@@ -50,7 +50,7 @@ class RewardItemAdapter(
             binding.tvItemName.text = item.name
             binding.tvItemPoints.text = "必要ポイント：${item.requiredPoints}"
             binding.tvItemPoints.setTextColor(
-                if (item.requiredPoints > userPoints) Color.RED else Color.BLACK
+                if (item.requiredPoints > userPoints) Color.RED else Color.BLUE
             )
             binding.imgItem.setImageResource(item.imageResId)
 

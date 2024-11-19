@@ -30,6 +30,8 @@
         android:layout_height="wrap_content"
         android:hint="ユーザー名"
         android:autofillHints="username"
+        android:inputType="text|textNoSuggestions"
+        android:maxLength="20"
         android:paddingTop="16dp" />
 
     <!-- 保存ボタン -->
