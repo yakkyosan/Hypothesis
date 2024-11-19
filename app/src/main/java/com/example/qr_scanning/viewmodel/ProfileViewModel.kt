@@ -40,4 +40,15 @@ class ProfileViewModel(private val userRepository: UserRepository) : ViewModel()
             }
         }
     }
+
+    fun updateProfileImage(uri: String) {
+        val currentUser = _userProfile.value
+        if (currentUser != null) {
+            val updatedUser = currentUser.copy(profileImageUrl = uri)
+            CoroutineScope(Dispatchers.IO).launch {
+                userRepository.updateUser(updatedUser)
+                loadUserProfile()
+            }
+        }
+    }
 }

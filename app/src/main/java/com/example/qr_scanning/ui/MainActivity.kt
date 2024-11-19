@@ -5,10 +5,12 @@ package com.example.qr_scanning.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.qr_scanning.R
 import com.example.qr_scanning.databinding.ActivityMainBinding
 import kotlinx.coroutines.flow.collectLatest
 
@@ -64,8 +66,14 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.userProfile.observe(this) { user ->
             if (user != null) {
                 binding.tvUserName.text = user.name
+                if (!user.profileImageUrl.isNullOrEmpty()) {
+                    binding.imgProfile.setImageURI(Uri.parse(user.profileImageUrl))
+                } else {
+                    binding.imgProfile.setImageResource(R.drawable.ic_default_profile)
+                }
             } else {
                 binding.tvUserName.text = "名前（未設定）"
+                binding.imgProfile.setImageResource(R.drawable.ic_default_profile)
             }
         }
 

@@ -9,6 +9,6 @@ data class User(
         @PrimaryKey(autoGenerate = true)
         val id: Int = 0,                 // ユーザーの一意なID
         val name: String,                // ユーザー名
-        val profileImageUrl: String,     // プロフィール画像のURL
+        val profileImageUrl: String?,     // プロフィール画像のURL
         var points: Int                  // ユーザーの保有ポイント
 )
