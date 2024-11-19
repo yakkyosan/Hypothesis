@@ -52,31 +52,36 @@ class RewardViewModel(
 
     fun exchangeItem(itemId: Int) {
         viewModelScope.launch {
-            val item = itemRepository.getItemById(itemId)
-            val user = userRepository.getUser(1)
+            try {
+                val item = itemRepository.getItemById(itemId)
+                val user = userRepository.getUser(1)
 
-            if (item != null && user != null) {
-                if (user.points >= item.requiredPoints) {
-                    // ポイントを消費して交換
-                    user.points -= item.requiredPoints
-                    userRepository.updateUser(user)
-                    _exchangeMessage.postValue("${item.name} を交換しました！")
+                if (item != null && user != null) {
+                    if (user.points >= item.requiredPoints) {
+                        // ポイントを消費して交換
+                        user.points -= item.requiredPoints
+                        userRepository.updateUser(user)
+                        _exchangeMessage.postValue("${item.name} を交換しました！")
 
-                    // exchangeStatus を 1（交換済み）に設定
-                    item.exchangeStatus = 1
-                    itemRepository.updateItem(item)
+                        // exchangeStatus を 1（交換済み）に設定
+                        item.exchangeStatus = 1
+                        itemRepository.updateItem(item)
 
-                    // ユーザーポイントを更新
-                    _userPoints.postValue(user.points)
+                        // ユーザーポイントを更新
+                        _userPoints.postValue(user.points)
 
-                    // アイテムリストを再読み込みしてUIを更新
-                    loadItems()
+                        // アイテムリストを再読み込みしてUIを更新
+                        loadItems()
+                    } else {
+                        // ポイント不足のメッセージ
+                        _exchangeMessage.postValue("ポイントが足りません！")
+                    }
                 } else {
-                    // ポイント不足のメッセージ
-                    _exchangeMessage.postValue("ポイントが足りません！")
+                    _exchangeMessage.postValue("交換に失敗しました。")
                 }
-            } else {
-                _exchangeMessage.postValue("交換に失敗しました。")
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _exchangeMessage.postValue("エラーが発生しました。")
             }
         }
     }

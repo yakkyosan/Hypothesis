@@ -29,7 +29,7 @@ class RewardActivity : AppCompatActivity() {
         )
     }
 
-    private lateinit var user: User
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class RewardActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         rewardItemAdapter = RewardItemAdapter(
-            onExchangeClicked = { item -> confirmExchange(item) },
+            onExchangeClicked = { item -> handleExchangeClicked(item) },
             onDetailClicked = { item -> showItemDetails(item) },
             onCouponClicked = { item -> showCouponDialog(item) }
         )
@@ -107,14 +107,26 @@ class RewardActivity : AppCompatActivity() {
         }
     }
 
+    private fun handleExchangeClicked(item:Item) {
+        user?.let { currentUser ->
+            if (currentUser.points >= item.requiredPoints) {
+                confirmExchange(item)
+            } else {
+                showToast("ポイントが足りません！")
+            }
+        } ?: run {
+            showToast("ユーザー情報が取得できていません")
+        }
+    }
+
     private fun confirmExchange(item: Item) {
         AlertDialog.Builder(this)
             .setTitle("${item.name} を交換しますか？")
             .setMessage(
                 """
-                所有ポイント: ${user.points}
+                所有ポイント: ${user?.points ?: "不明"}
                 必要ポイント: ${item.requiredPoints}
-                交換後のポイント数: ${user.points - item.requiredPoints}
+                交換後のポイント数: ${user?.points?.minus(item.requiredPoints) ?: "不明"}
                 """.trimIndent()
             )
             .setPositiveButton("交換する") { _, _ ->
