@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string-array name="valid_qr_code_ids">
-        <item>Koshi_Koshin_zPjBfR1H</item>
+        <item tools:ignore="Typos">Koshi_Koshin_zPjBfR1H</item>
         <item>Koshi_Koshin_7y6DGk9U</item>
         <item>Koshi_Koshin_tI2TK1ob</item>
         <item>Koshi_Koshin_8XRXPPLi</item>
